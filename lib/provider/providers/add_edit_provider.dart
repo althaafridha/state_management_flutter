@@ -96,7 +96,7 @@ class AddEditProvider extends ChangeNotifier {
   }
 
   Future<void> updateBiodata(id) async {
-    if (listPekerjaan != null) {
+    if (listPekerjaan.isNotEmpty) {
       try {
         await FirebaseFirestore.instance.collection('tes').doc(id).update({
           'nama': namaController.text,

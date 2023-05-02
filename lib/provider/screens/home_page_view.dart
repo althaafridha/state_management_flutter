@@ -23,7 +23,9 @@ class HomeProviderPageView extends StatelessWidget {
             builder: (context, provider, child) {
               return provider.isLoading
                   ? const Center(child: CircularProgressIndicator())
-                  : const ListItemHome();
+                  : provider.dataList.isEmpty
+                      ? const Center(child: Text('Data Kosong'))
+                      : const ListItemHome();
             },
           ),
           floatingActionButton: FloatingActionButton(

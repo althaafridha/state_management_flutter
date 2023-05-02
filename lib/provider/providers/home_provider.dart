@@ -15,6 +15,11 @@ class HomeProvider extends ChangeNotifier {
     getDataList();
   }
 
+  void refresh(){
+    _showLoading();
+    getDataList();
+  }
+
   void getDataList() async {
     QuerySnapshot snapshot =
         await FirebaseFirestore.instance.collection('tes').get();
@@ -36,54 +41,7 @@ class HomeProvider extends ChangeNotifier {
   }
 
   void _showLoading() async {
-    await Future.delayed(const Duration(seconds: 3));
-    _isLoading = false;
+    _dataList.isNotEmpty ? _isLoading = false : _isLoading = true;
     notifyListeners();
-  }
-
-  showAlertDialog(BuildContext context, id) {
-    // set up the button
-    Widget okButton = TextButton(
-      child: Text("OK"),
-      onPressed: () {
-        deleteData(id);
-        notifyListeners();
-        _isLoading = true;
-        _showLoading();
-        Navigator.pop(context);
-      },
-    );
-
-    Widget cancelButton = TextButton(
-      child: Text("Cancel"),
-      onPressed: () {
-        Navigator.pop(context);
-      },
-    );
-
-    // set up the AlertDialog
-    AlertDialog alert = AlertDialog(
-      title: const Text("Delete Data"),
-      content: const Text("Are you sure want to delete this data?"),
-      actions: [
-        cancelButton,
-        okButton,
-      ],
-    );
-
-    // show the dialog
-    showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        return alert;
-      },
-    );
-  }
-
-  void deleteData(String id) async {
-    await FirebaseFirestore.instance.collection('tes').doc(id).delete();
-    notifyListeners();
-    _showLoading();
-    getDataList();
   }
 }

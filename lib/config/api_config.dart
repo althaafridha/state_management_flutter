@@ -1,4 +1,4 @@
 class ApiConfig {
   static String pendidikan =
-      "http://192.168.118.97/statemanagement/pendidikan.php";
+      "http://192.168.1.3/statemanagement/pendidikan.php";
 }

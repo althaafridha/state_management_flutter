@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:latihan_state_management/models/biodata_model.dart';
 import 'package:latihan_state_management/provider/providers/home_provider.dart';
+import 'package:latihan_state_management/provider/widgets/alert_dialog.dart';
 import 'package:provider/provider.dart';
 
 import '../screens/add_edit_data_page_view.dart';
@@ -19,7 +20,10 @@ class ListItemHome extends StatelessWidget {
           BiodataModel data = value.dataList[index];
           return InkWell(
             onTap: () {
-              Navigator.push(context, MaterialPageRoute(builder: (context) => AddEditDataPageView(data.id)));
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => AddEditDataPageView(data.id)));
             },
             child: Container(
               margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
@@ -73,7 +77,8 @@ class ListItemHome extends StatelessWidget {
                   const Spacer(),
                   IconButton(
                     onPressed: () {
-                      value.showAlertDialog(context, data.id);
+                      showAlertDialog(context, data.id);
+                      value.refresh();
                     },
                     icon: const Icon(
                       Icons.delete,

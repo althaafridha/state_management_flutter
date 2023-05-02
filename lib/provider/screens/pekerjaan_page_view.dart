@@ -213,13 +213,6 @@ class _PekerjaanPageViewState extends State<PekerjaanPageView> {
                     ),
                   );
                   Navigator.pushReplacementNamed(context, '/provider/home');
-                  // value.updateBiodata(widget.id);
-                  // ScaffoldMessenger.of(context).showSnackBar(
-                  //   const SnackBar(
-                  //     content: Text('Data berhasil diupdate'),
-                  //   ),
-                  // );
-                  // Navigator.pushReplacementNamed(context, '/provider/home');
                 },
                 color: Colors.blue,
                 minWidth: double.infinity,
