@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:latihan_state_management/provider/providers/add_edit_provider.dart';
+import 'package:latihan_state_management/providers/add_edit_provider.dart';
 import 'package:provider/provider.dart';
 
 class PendidikanPageView extends StatefulWidget {

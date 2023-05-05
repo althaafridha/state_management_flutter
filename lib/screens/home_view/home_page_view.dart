@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:latihan_state_management/provider/widgets/list_item_home.dart';
+import 'package:latihan_state_management/widgets/list_item_home.dart';
 import 'package:provider/provider.dart';
 
-import '../providers/home_provider.dart';
-import 'add_edit_data_page_view.dart';
+import '../../providers/home_provider.dart';
+import '../add_edit_view/add_edit_data_page_view.dart';
 
 class HomeProviderPageView extends StatelessWidget {
   const HomeProviderPageView({super.key});

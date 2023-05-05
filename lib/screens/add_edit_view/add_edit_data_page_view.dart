@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:latihan_state_management/provider/screens/biodata_page_view.dart';
-import 'package:latihan_state_management/provider/screens/pekerjaan_page_view.dart';
-import 'package:latihan_state_management/provider/screens/pendidikan_page_view.dart';
+import 'package:latihan_state_management/screens/add_edit_view/tab_biodata_page_view.dart';
+import 'package:latihan_state_management/screens/add_edit_view/tab_pekerjaan_page_view.dart';
+import 'package:latihan_state_management/screens/add_edit_view/tab_pendidikan_page_view.dart';
 import 'package:provider/provider.dart';
 
-import '../providers/add_edit_provider.dart';
+import '../../providers/add_edit_provider.dart';
 
 class AddEditDataPageView extends StatefulWidget {
   final String? id;

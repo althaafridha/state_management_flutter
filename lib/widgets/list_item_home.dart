@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:latihan_state_management/models/biodata_model.dart';
-import 'package:latihan_state_management/provider/providers/home_provider.dart';
-import 'package:latihan_state_management/provider/widgets/alert_dialog.dart';
+import 'package:latihan_state_management/providers/home_provider.dart';
+import 'package:latihan_state_management/widgets/alert_dialog.dart';
 import 'package:provider/provider.dart';
 
-import '../screens/add_edit_data_page_view.dart';
+import '../screens/add_edit_view/add_edit_data_page_view.dart';
 
 class ListItemHome extends StatelessWidget {
   const ListItemHome({
@@ -78,7 +78,6 @@ class ListItemHome extends StatelessWidget {
                   IconButton(
                     onPressed: () {
                       showAlertDialog(context, data.id);
-                      value.refresh();
                     },
                     icon: const Icon(
                       Icons.delete,

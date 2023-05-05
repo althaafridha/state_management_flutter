@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../providers/add_edit_provider.dart';
+import '../../providers/add_edit_provider.dart';
 
 class PekerjaanPageView extends StatefulWidget {
   final String id;
-  const PekerjaanPageView({super.key,required this.id});
+  const PekerjaanPageView({super.key, required this.id});
 
   @override
   State<PekerjaanPageView> createState() => _PekerjaanPageViewState();
@@ -19,43 +19,92 @@ class _PekerjaanPageViewState extends State<PekerjaanPageView> {
     return Scaffold(
       // resizeToAvoidBottomInset: false,
       body: Consumer<AddEditProvider>(builder: (context, provider, child) {
-        return ListView.builder(
-            itemCount: provider.listPekerjaan.length,
-            itemBuilder: (context, index) {
-              return Container(
-                padding: const EdgeInsets.all(15),
-                margin:
-                    const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.circular(10),
-                  boxShadow: [
-                    BoxShadow(
-                      color: Colors.grey.withOpacity(0.5),
-                      spreadRadius: 0,
-                      blurRadius: 5,
-                      offset: const Offset(0, 0), // changes position of shadow
+        return widget.id.isNotEmpty
+            ? ListView.builder(
+                itemCount: provider.listNamaKerja.length,
+                itemBuilder: (context, index) {
+                  return Container(
+                    padding: const EdgeInsets.all(15),
+                    margin: const EdgeInsets.symmetric(
+                        horizontal: 20, vertical: 10),
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(10),
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.grey.withOpacity(0.5),
+                          spreadRadius: 0,
+                          blurRadius: 5,
+                          offset:
+                              const Offset(0, 0), // changes position of shadow
+                        ),
+                      ],
                     ),
-                  ],
-                ),
-                child: Row(
-                  children: [
-                    Text(
-                      provider.listPekerjaan[index],
-                      style: const TextStyle(fontSize: 16),
+                    child: Row(
+                      children: [
+                        Text(
+                          provider.listNamaKerja[index],
+                          style: const TextStyle(fontSize: 16),
+                        ),
+                        const SizedBox(
+                          width: 5,
+                        ),
+                        Text(
+                          "(${provider.listTahunKerja[index]} tahun)",
+                          style: const TextStyle(fontSize: 16),
+                        ),
+                        const Spacer(),
+                        InkWell(
+                          onTap: () {
+                            provider.deleteData(index);
+                          },
+                          child: const Icon(
+                            Icons.close,
+                            color: Colors.red,
+                          ),
+                        )
+                      ],
                     ),
-                    const Spacer(),
-                    InkWell(
-                      onTap: () => provider.deletePekerjaan(index),
-                      child: const Icon(
-                        Icons.close,
-                        color: Colors.red,
-                      ),
-                    )
-                  ],
-                ),
-              );
-            });
+                  );
+                })
+            : ListView.builder(
+                itemCount: provider.listPekerjaan.length,
+                itemBuilder: (context, index) {
+                  return Container(
+                    padding: const EdgeInsets.all(15),
+                    margin: const EdgeInsets.symmetric(
+                        horizontal: 20, vertical: 10),
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(10),
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.grey.withOpacity(0.5),
+                          spreadRadius: 0,
+                          blurRadius: 5,
+                          offset:
+                              const Offset(0, 0), // changes position of shadow
+                        ),
+                      ],
+                    ),
+                    child: Row(
+                      children: [
+                        Text(
+                          provider.listPekerjaan[index],
+                          style: const TextStyle(fontSize: 16),
+                        ),
+                        const Spacer(),
+                        InkWell(
+                          onTap: () => provider.deletePekerjaan(index),
+                          child: const Icon(
+                            Icons.close,
+                            color: Colors.red,
+                          ),
+                        )
+                      ],
+                    ),
+                  );
+                });
       }),
       bottomNavigationBar:
           Consumer<AddEditProvider>(builder: (context, value, child) {
@@ -202,14 +251,14 @@ class _PekerjaanPageViewState extends State<PekerjaanPageView> {
               MaterialButton(
                 height: 60,
                 onPressed: () {
-                  value.isAddBio == true ? value.saveBiodata() : value.updateBiodata(widget.id);
+                  value.isAddBio == true
+                      ? value.saveBiodata()
+                      : value.updateBiodata(widget.id);
                   ScaffoldMessenger.of(context).showSnackBar(
                     SnackBar(
-                      content: Text(
-                        value.isAddBio == true
-                        ? "Data berhasil disimpan"
-                        : "Data berhasil diupdate"
-                      ),
+                      content: Text(value.isAddBio == true
+                          ? "Data berhasil disimpan"
+                          : "Data berhasil diupdate"),
                     ),
                   );
                   Navigator.pushReplacementNamed(context, '/provider/home');

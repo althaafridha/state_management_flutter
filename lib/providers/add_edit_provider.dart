@@ -5,8 +5,8 @@ import 'package:flutter/material.dart';
 
 import 'package:http/http.dart' as http;
 
-import '../../config/api_config.dart';
-import '../../models/biodata_model.dart';
+import '../config/api_config.dart';
+import '../models/biodata_model.dart';
 
 class AddEditProvider extends ChangeNotifier {
   bool isAddBio = true;
@@ -77,8 +77,32 @@ class AddEditProvider extends ChangeNotifier {
     notifyListeners();
   }
 
+  void deleteData(int index) async {
+    final firestoreInstance = FirebaseFirestore.instance;
+
+    listNamaKerja.removeAt(index);
+    listTahunKerja.removeAt(index);
+    listPekerjaan.removeAt(index);
+
+    if (index >= 0 && index < listPekerjaan.length) {
+      final id = _dataList[index].id;
+
+      try {
+        await firestoreInstance.collection('tes').doc(id).update({
+          'nama_perjaan': FieldValue.arrayRemove([namaPekerjaanController]),
+          'tahun_kerja': FieldValue.arrayRemove([tahunMasukController])
+        });
+      notifyListeners();
+      } catch (e) {
+        print('Error deleting data: $e');
+      }
+    } else {
+      print('Invalid index: $index');
+    }
+  }
+
   Future<void> saveBiodata() async {
-    if (listPekerjaan != null) {
+    if (listPekerjaan.isNotEmpty) {
       try {
         await FirebaseFirestore.instance.collection('tes').add({
           'nama': namaController.text,

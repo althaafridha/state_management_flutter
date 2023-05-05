@@ -11,37 +11,27 @@ class HomeProvider extends ChangeNotifier {
   bool get isLoading => _isLoading;
 
   HomeProvider() {
-    _showLoading();
-    getDataList();
-  }
-
-  void refresh(){
-    _showLoading();
     getDataList();
   }
 
   void getDataList() async {
+    _isLoading = true;
+    notifyListeners();
     QuerySnapshot snapshot =
         await FirebaseFirestore.instance.collection('tes').get();
     _dataList = snapshot.docs.map((doc) {
-      List<String> listPekerjaan = []; // tambahan kode
+      List<String> listPekerjaan = []; 
       List<dynamic> namaPekerjaanList =
-          doc.get('nama_pekerjaan'); // tambahan kode
+          doc.get('nama_pekerjaan'); 
       for (var pekerjaan in namaPekerjaanList) {
-        // tambahan kode
-        listPekerjaan.add(pekerjaan.toString()); // tambahan kode
-      } // tambahan kode
+        listPekerjaan.add(pekerjaan.toString()); 
+      } 
       BiodataModel biodata = BiodataModel.fromFirestore(doc);
-      biodata.listPekerjaan = listPekerjaan; // tambahan kode
+      biodata.listPekerjaan = listPekerjaan; 
       return biodata;
     }).toList();
 
     _isLoading = false;
-    notifyListeners();
-  }
-
-  void _showLoading() async {
-    _dataList.isNotEmpty ? _isLoading = false : _isLoading = true;
     notifyListeners();
   }
 }
