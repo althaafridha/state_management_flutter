@@ -1,13 +1,15 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:latihan_state_management/cubit/data_bloc.dart';
 
 showAlertDialog(BuildContext context, id) {
+  final cubit = DataBloc();
   // set up the button
   Widget okButton = TextButton(
     child: Text("OK"),
     onPressed: () {
-      deleteData(id);
-      Navigator.pushNamed(context, '/provider/home');
+      cubit.deleteData(id);
+      Navigator.pushNamed(context, '/provider');
     },
   );
 

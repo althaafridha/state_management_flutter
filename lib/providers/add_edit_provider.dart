@@ -12,6 +12,7 @@ class AddEditProvider extends ChangeNotifier {
   bool isAddBio = true;
 
   AddEditProvider(id) {
+    getPendidikanList();
     if (id != null) {
       isAddBio = false;
       notifyListeners();
@@ -30,7 +31,6 @@ class AddEditProvider extends ChangeNotifier {
       alamatController.text = '';
       listPekerjaan = [];
     }
-    getPendidikanList();
   }
 
   BiodataModel? data;

@@ -261,7 +261,7 @@ class _PekerjaanPageViewState extends State<PekerjaanPageView> {
                           : "Data berhasil diupdate"),
                     ),
                   );
-                  Navigator.pushReplacementNamed(context, '/provider/home');
+                  Navigator.pushReplacementNamed(context, '/provider');
                 },
                 color: Colors.blue,
                 minWidth: double.infinity,

@@ -6,5 +6,4 @@ final Map<String, WidgetBuilder> appRoutes = {
   '/': (context) => const DasboardPageView(),
 
   '/provider' : (context) => const HomeProviderPageView(),
-  '/provider/home' :(context) => const HomeProviderPageView(),
 };
